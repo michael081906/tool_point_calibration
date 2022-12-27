@@ -42,6 +42,8 @@ target_link_libraries(console_calibration
   ${CERES_LIBRARIES}
   tool_point_calibration
 )
+add_executable(pose_to_tf src/pose_to_tf.cpp)
+target_link_libraries(pose_to_tf ${catkin_LIBRARIES})
 
 
 #############
