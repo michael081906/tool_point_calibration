@@ -1,0 +1,12 @@
+<launch>
+  <arg name = "base_frame"   default = "base_link"/>
+  <arg name = "child_frame"  default = "child_frame"/>
+  <arg name = "pose_topic"   default = "pose_topic"/>
+
+  <node name="tf_to_pose" pkg="tool_point_calibration" type="pose_to_tf" output="screen">
+    <param name = "base_frame"  value = "$(arg base_frame)"/>
+    <param name = "child_frame" value = "$(arg child_frame)"/>
+    <remap from = "/pose_topic" to    = "/$(arg pose_topic)"/>
+  </node>
+
+</launch>

@@ -1,0 +1,24 @@
+<launch>
+  <!--Front-->
+  <arg name = "base_frame_front"   default = "base_link_front"/>
+  <arg name = "child_frame_front"  default = "child_frame_front"/>
+  <arg name = "pose_topic_front"   default = "pose_topic_front"/>
+  <!--Rear-->
+  <arg name = "base_frame_rear"   default = "base_link_rear"/>
+  <arg name = "child_frame_rear"  default = "child_frame_rear"/>
+  <arg name = "pose_topic_rear"   default = "pose_topic_rear"/>
+
+
+  <node name="tf_to_pose_front" pkg="tool_point_calibration" type="pose_to_tf" output="screen">
+    <param name = "base_frame"  value = "$(arg base_frame_front)"/>
+    <param name = "child_frame" value = "$(arg child_frame_front)"/>
+    <remap from = "/pose_topic" to    = "/$(arg pose_topic_front)"/>
+  </node>
+
+  <node name="tf_to_pose_rear" pkg="tool_point_calibration" type="pose_to_tf" output="screen">
+    <param name = "base_frame"  value = "$(arg base_frame_rear)"/>
+    <param name = "child_frame" value = "$(arg child_frame_rear)"/>
+    <remap from = "/pose_topic" to    = "/$(arg pose_topic_rear)"/>
+  </node>
+
+</launch>
