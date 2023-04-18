@@ -1,0 +1,16 @@
+<launch>
+  <arg name = "offset_x"   default = "-0.00373585"/>
+  <arg name = "offset_y"   default = "0.0561956"/>
+  <arg name = "offset_z"   default = "-0.0585919"/>
+  <arg name = "ref_frame"   default = "marker_kuka_flange"/>
+  <arg name = "tip_frame"   default = "tool_tip"/>
+
+  <node name="tf_br_tip" pkg="tool_point_calibration" type="tf_br_tip" output="screen">
+    <param name = "offset_x"   value = "$(arg offset_x)"/>
+    <param name = "offset_y"   value = "$(arg offset_y)"/>
+    <param name = "offset_z"   value = "$(arg offset_z)"/>
+    <param name = "ref_frame"  value = "$(arg ref_frame)"/>
+    <param name = "tip_frame"  value = "$(arg tip_frame)"/>
+  </node>
+
+</launch>

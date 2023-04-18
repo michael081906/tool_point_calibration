@@ -47,6 +47,9 @@ target_link_libraries(console_calibration
 add_executable(pose_to_tf src/pose_to_tf.cpp)
 target_link_libraries(pose_to_tf ${catkin_LIBRARIES})
 
+add_executable(tf_br_tip src/tf_br_tip.cpp)
+target_link_libraries(tf_br_tip ${catkin_LIBRARIES})
+
 
 #############
 ## Install ##
