@@ -1,16 +1,19 @@
 <launch>
-  <arg name = "offset_x"   default = "-0.00373585"/>
-  <arg name = "offset_y"   default = "0.0561956"/>
-  <arg name = "offset_z"   default = "-0.0585919"/>
-  <arg name = "ref_frame"   default = "front_marker"/>
-  <arg name = "tip_frame"   default = "tool_tip"/>
+  <arg name = "offset_x"    default = "0.00443199"/>
+  <arg name = "offset_y"    default = "0.070835  "/>
+  <arg name = "offset_z"    default = "0.0138238"/>
+  <arg name = "ref_frame"   default = "instrument_front"/>
+  <arg name = "tip_frame"   default = "cautery_tip"/>
 
-  <node name="tf_br_tip" pkg="tool_point_calibration" type="tf_br_tip" output="screen">
+  <!-- <node name="tf_br_tip" pkg="tool_point_calibration" type="tf_br_tip" output="screen">
     <param name = "offset_x"   value = "$(arg offset_x)"/>
     <param name = "offset_y"   value = "$(arg offset_y)"/>
     <param name = "offset_z"   value = "$(arg offset_z)"/>
     <param name = "ref_frame"  value = "$(arg ref_frame)"/>
     <param name = "tip_frame"  value = "$(arg tip_frame)"/>
-  </node>
+  </node> -->
+
+  <node pkg="tf" type="static_transform_publisher" name="front_to_cautery" 
+        args="$(arg offset_x) $(arg offset_y) $(arg offset_z) 0 0 0 1 $(arg ref_frame) $(arg tip_frame) 100" />
 
 </launch>

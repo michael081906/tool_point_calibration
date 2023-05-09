@@ -24,7 +24,7 @@ int main(int argc, char** argv){
   while (node.ok()){
         try{
             transform_br.setRotation( tf::Quaternion::getIdentity());
-            br.sendTransform        ( tf::StampedTransform(transform_br, ros::Time::now(), "ref_frame", "tip_frame") );
+            br.sendTransform        ( tf::StampedTransform(transform_br, ros::Time::now(), ref_frame, tip_frame) );
         }
         catch (tf::TransformException ex){
             ROS_ERROR("%s",ex.what());

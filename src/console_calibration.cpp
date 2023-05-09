@@ -2,6 +2,8 @@
 #include <tf/transform_listener.h>
 #include <ros/ros.h>
 #include <tf_conversions/tf_eigen.h>
+// #include <yaml-cpp/yaml.h>
+#include <fstream>
 
 int main(int argc, char** argv)
 {
@@ -97,6 +99,13 @@ int main(int argc, char** argv)
   tool_point_calibration::TcpCalibrationResult result =
       tool_point_calibration::calibrateTcp(observations);
 
+  // ------------------------------------
+  // YAML::Emitter emitter;
+  // emitter << "Hello world!";
+
+  // std::ofstream fout("file.yaml");
+  // fout << emitter.c_str();
+  // ------------------------------------
   ROS_INFO_STREAM("Calibrated tcp (meters in xyz): [" << result.tcp_offset.transpose() << "] from " << tool0_frame);
   ROS_INFO_STREAM("Touch point (meters in xyz): [" << result.touch_point.transpose() << "] in frame " << base_frame);
   ROS_INFO_STREAM("Average residual: " << result.average_residual);
