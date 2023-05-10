@@ -3,16 +3,26 @@
   <!-- (start your tracking system's ROS driver) -->
 
   <include file="$(find easy_handeye)/launch/calibrate.launch">
-    <arg name="eye_on_hand"             value="false"/>
-    <arg name="namespace_prefix"        value="my_eob_calib"/>
+    <arg name="eye_on_hand"             value="true"/>
+    <arg name="namespace_prefix"        value="dvrk"/>
     <arg name="freehand_robot_movement" value="true" />
 
     <!-- fill in the following parameters according to your robot's published tf frames -->
-    <arg name="robot_base_frame"      value="iiwa_link_0"/>
-    <arg name="robot_effector_frame"  value="iiwa_link_ee"/>
+    <arg name="robot_base_frame"      value="PSM1_base"/>
+    <arg name="robot_effector_frame"  value="PSM1_tool_main_link"/>
 
     <!-- fill in the following parameters according to your tracking system's published tf frames -->
-    <arg name="tracking_base_frame"   value="atracsys"/>
-    <arg name="tracking_marker_frame" value="kuka_flange"/>
+    <arg name="tracking_base_frame"   value="camera"/>
+    <arg name="tracking_marker_frame" value="marker"/>
   </include>
+
+  <node pkg = "nir_blob_tracker" type ="tf_inverter" name ="tf_inverter">
+       <!-- This takes the name from the ROS Atracsys system-->
+       <param name = "listen_frame_a"  value = "atracsys" />
+       <param name = "listen_frame_b"  value = "instrument_rear" />
+       <!-- This will be used by the hand_to_eye node-->
+       <param name = "new_frame_a"     value = "camera" />
+       <param name = "new_frame_b"     value = "marker" />
+  </node>
+
 </launch>
