@@ -1,5 +1,15 @@
 <launch>
 
+    <!-- TF relationship
+        PSM1_tool_main_link -> 
+		instrument_rear_calibrated_offset -> 
+		fusion_track -> 
+		fusion_track_instrument_front -> 
+		cautery_tip
+    -->
+
+	
+
     <include file ="$(find tool_point_calibration)/launch/dvrk_tf_br_easy_hand_eye.launch">
 		<arg name ="eye_on_hand"   value = "true"/>
 	</include> 
