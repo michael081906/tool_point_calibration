@@ -1,7 +1,7 @@
 <launch>
-  <arg name = "offset_x"    default = "0.00443199"/>
-  <arg name = "offset_y"    default = "0.070835  "/>
-  <arg name = "offset_z"    default = "0.0138238"/>
+  <arg name = "offset_x"    default = "0.00233369"/>
+  <arg name = "offset_y"    default = "0.0325861"/>
+  <arg name = "offset_z"    default = "0.0173584"/>
   <arg name = "ref_frame"   default = "instrument_front"/>
   <arg name = "tip_frame"   default = "cautery_tip"/>
 
@@ -14,6 +14,20 @@
   </node> -->
 
   <node pkg="tf" type="static_transform_publisher" name="front_to_cautery" 
-        args="$(arg offset_x) $(arg offset_y) $(arg offset_z) 0 0 0 1 $(arg ref_frame) $(arg tip_frame) 100" />
+        args="$(arg offset_x) $(arg offset_y) $(arg offset_z) 0 0 0 1 $(arg ref_frame) $(arg tip_frame)_calibrated 100" />
+
+  
+  <node pkg = "nir_blob_tracker" type ="tf_renamer_dual" name ="tf_renamer_dual">
+        <param name = "listen_frame_a"  value = "PSM1_base" />
+        <param name = "listen_frame_b"  value = "$(arg ref_frame)" />
+        <param name = "listen_frame_c"  value = "PSM1_base" />
+        <param name = "listen_frame_d"  value = "PSM1_tool_tip_link" />
+        <param name = "new_frame_a"     value = "PSM1_tool_tip_link" />
+        <param name = "new_frame_b"     value = "$(arg tip_frame)" />
+        <param name = "offset_x"        value = "$(arg offset_x)" />
+        <param name = "offset_y"        value = "$(arg offset_y)" />
+        <param name = "offset_z"        value = "$(arg offset_z)" />
+    </node>
+
 
 </launch>
