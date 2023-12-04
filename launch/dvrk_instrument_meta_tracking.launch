@@ -1,3 +1,9 @@
+<!--
+	The launch file is to launch a frame transformation to create tf 
+	from rcm to cautery tip
+
+	Notice:  You will need the Atracsys running 
+-->
 <launch>
 
     <include file ="$(find tool_point_calibration)/launch/dvrk_tf_br_easy_hand_eye.launch">
