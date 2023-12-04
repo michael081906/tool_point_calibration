@@ -1,0 +1,37 @@
+<launch>
+  <arg name = "offset_x"    default = "0.00233369"/>
+  <arg name = "offset_y"    default = "0.0325861"/>
+  <arg name = "offset_z"    default = "0.0173584"/>
+  <arg name = "ref_frame"   default = "PSM1_tool_tip_link"/>
+  <arg name = "tip_frame"   default = "cautery_tip"/>
+
+
+  <node pkg="tf" type="static_transform_publisher" name="atracsys" 
+        args="0.25 0.5 -0.5 0 0 0 1 atracsys world  100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="front_to_cautery" 
+        args="$(arg offset_x) $(arg offset_y) $(arg offset_z) 0 0 0 1 $(arg ref_frame) cautery_tip 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="rear_to_cautery" 
+        args="-0.02 0 0 0 0 0 1 PSM1_tool_main_link instrument_rear_mock 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="atrasys_fusion_track_origin" 
+        args="0.0 0.0 0.0 0 0 0 1 atracsys fusion_track 100" />
+
+
+    <node pkg = "nir_blob_tracker" type ="tf_renamer" name ="tf_renamer_fusion_to_front">
+        <param name = "listen_frame_a"  value = "atracsys" />
+        <param name = "listen_frame_b"  value = "cautery_tip" />
+        <param name = "new_frame_a"     value = "fusion_track" />
+        <param name = "new_frame_b"     value = "fusion_track_instrument_front" />
+    </node>
+
+    <node pkg = "nir_blob_tracker" type ="tf_renamer" name ="tf_renamer_fusion_to_rear">
+        <param name = "listen_frame_a"  value = "atracsys" />
+        <param name = "listen_frame_b"  value = "instrument_rear_mock" />
+        <param name = "new_frame_a"     value = "fusion_track" />
+        <param name = "new_frame_b"     value = "fusion_track_instrument_rear" />
+    </node>
+
+
+</launch>
