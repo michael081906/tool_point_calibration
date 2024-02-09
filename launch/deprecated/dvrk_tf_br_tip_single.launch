@@ -1,0 +1,14 @@
+<launch>
+  <arg name = "offset_x"    default = "-0.00262784"/>
+  <arg name = "offset_y"    default = "-0.0328135"/>
+  <arg name = "offset_z"    default = "0.0175386"/>
+  <arg name = "ref_frame"   default = "instrument_front"/>
+  <arg name = "tip_frame"   default = "cautery_tip"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="front_to_cautery" 
+        args="$(arg offset_x) $(arg offset_y) $(arg offset_z) 0 0 0 1 $(arg ref_frame) $(arg tip_frame)_calibrated 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="atracsys_tcp" 
+        args="0.248886 0.283935 1.24997 0 0 0 1 atracsys tcp_point 100" />
+
+</launch>

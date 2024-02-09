@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name   =   "eye_on_hand"           doc   = "eye-on-hand instead of eye-on-base" />
+    <arg name   =   "namespace_prefix"      default = "realsense" />
+    <arg if     =   "$(arg eye_on_hand)"    name    = "namespace"       value = "$(arg namespace_prefix)_eye_on_hand" />
+
+    <!--it is possible to override the link names saved in the yaml file in case of name clashes, for example-->
+    <arg name       = "robot_effector_frame" default = "realsense" />
+    <arg name       = "tracking_base_frame"  default = "camera_color_optical_frame" />
+    
+    <arg name="inverse"          default="true" />
+    <arg name="calibration_file" default="" />
+
+
+    <!--publish hand-eye calibration-->
+    <group ns="$(arg namespace)">
+        <param name   = "eye_on_hand"                                     value="$(arg eye_on_hand)" />
+        <param name   = "robot_effector_frame"                            value="$(arg robot_effector_frame)" />
+        <param name   = "tracking_base_frame"                             value="$(arg tracking_base_frame)" />
+        <param name   = "inverse"                                         value="$(arg inverse)" />
+        <param name   = "calibration_file"                                value="$(arg calibration_file)" />
+        <node  name   = "$(anon handeye_publisher)" pkg="easy_handeye" type="publish.py" output="screen"/>
+    </group>
+
+</launch>

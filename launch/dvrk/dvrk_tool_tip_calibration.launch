@@ -1,7 +1,7 @@
 <launch>
   <arg name = "base_frame"  default = "atracsys"/>
   <arg name = "tool0_frame" default = "instrument_front"/>
-  <arg name = "num_samples" default = "20"/>
+  <arg name = "num_samples" default = "10"/>
 
   <node name = "console_tcp_calibration" pkg="tool_point_calibration" type="console_calibration" output="screen">
     <param name = "base_frame"  value = "$(arg base_frame)"/>

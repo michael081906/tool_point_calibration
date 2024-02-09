@@ -10,12 +10,12 @@
 
 	
 
-    <include file ="$(find tool_point_calibration)/launch/dvrk_tf_br_easy_hand_eye.launch">
+    <include file ="$(find tool_point_calibration)/launch/dvrk/dvrk_tf_br_easy_hand_eye.launch">
 		<arg name ="eye_on_hand"   value = "true"/>
 	</include> 
 
 
-    <include file ="$(find tool_point_calibration)/launch/dvrk_tf_br_tip.launch">
+    <include file ="$(find tool_point_calibration)/launch/dvrk/dvrk_tf_br_tip.launch">
 		<arg name ="ref_frame"   value = "fusion_track_instrument_front"/>
         <arg name ="tip_frame"   value = "cautery_tip"/>
 	</include> 

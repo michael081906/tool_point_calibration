@@ -1,0 +1,14 @@
+<launch>
+  <arg name = "offset_x"    default = "-0.0130188 "/>
+  <arg name = "offset_y"    default = "-0.0332346"/>
+  <arg name = "offset_z"    default = "0.0891474"/>
+  <arg name = "ref_frame"   default = "tcp"/>
+  <arg name = "tip_frame"   default = "tcp"/>
+    
+
+  <node pkg="tf" type="static_transform_publisher" name="front_to_cautery" 
+        args="$(arg offset_x) $(arg offset_y) $(arg offset_z) 0 0 0 1 $(arg ref_frame) $(arg tip_frame)_calibrated 100" />
+
+
+
+</launch>
