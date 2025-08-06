@@ -6,6 +6,7 @@ add_compile_options(-std=c++14)
 find_package(catkin REQUIRED COMPONENTS
   tf
   tf_conversions
+  roslib
 )
 find_package(Ceres REQUIRED)
 find_package(Eigen3 REQUIRED)

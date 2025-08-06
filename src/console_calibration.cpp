@@ -4,6 +4,9 @@
 #include <tf_conversions/tf_eigen.h>
 // #include <yaml-cpp/yaml.h>
 #include <fstream>
+#include <iomanip>
+#include <Eigen/Dense>
+#include <ros/package.h>
 
 int main(int argc, char** argv)
 {
@@ -117,6 +120,24 @@ int main(int argc, char** argv)
              " convergence and residual error, but without a meaningful result. You are encouraged"
              " to try with more points");
   }
+
+  std::string package_path = ros::package::getPath("tool_point_calibration");
+  std::string path         = package_path + "/launch/tcp_args.launch";
+
+  std::ofstream file(path);
+
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << path << std::endl;
+        return -1;
+    }
+
+    file << std::fixed << std::setprecision(8);  // Set precision for consistent float formatting
+
+    file << "<arg name = \"offset_x\"    default = \"" << result.tcp_offset.x() << "\"/>\n";
+    file << "<arg name = \"offset_y\"    default = \"" << result.tcp_offset.y() << "\"/>\n";
+    file << "<arg name = \"offset_z\"    default = \"" << result.tcp_offset.z() << "\"/>\n";
+
+    file.close();
 
   return 0;
 }
