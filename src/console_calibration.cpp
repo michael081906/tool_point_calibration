@@ -133,9 +133,15 @@ int main(int argc, char** argv)
 
     file << std::fixed << std::setprecision(8);  // Set precision for consistent float formatting
 
+    file << "<!-- This is for calibrated tip -->\n";
     file << "<arg name = \"offset_x\"    default = \"" << result.tcp_offset.x() << "\"/>\n";
     file << "<arg name = \"offset_y\"    default = \"" << result.tcp_offset.y() << "\"/>\n";
     file << "<arg name = \"offset_z\"    default = \"" << result.tcp_offset.z() << "\"/>\n";
+
+    file << "<!-- This is for the touch point (e.g., rcm point) -->\n";
+    file << "<arg name = \"touch_point_x\"    default = \"" << result.touch_point.x() << "\"/>\n";
+    file << "<arg name = \"touch_point_y\"    default = \"" << result.touch_point.y() << "\"/>\n";
+    file << "<arg name = \"touch_point_z\"    default = \"" << result.touch_point.z() << "\"/>\n";
 
     file.close();
 
