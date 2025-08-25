@@ -1,8 +1,8 @@
 <!-- This is for calibrated tip -->
-<arg name = "offset_x"    default = "-0.01165925"/>
-<arg name = "offset_y"    default = "0.03700886"/>
-<arg name = "offset_z"    default = "-0.05041287"/>
+<arg name = "offset_x"    default = "-0.01141274"/>
+<arg name = "offset_y"    default = "0.03882707"/>
+<arg name = "offset_z"    default = "-0.04512477"/>
 <!-- This is for the touch point (e.g., rcm point) -->
-<arg name = "touch_point_x"    default = "0.13968086"/>
-<arg name = "touch_point_y"    default = "-0.12883264"/>
-<arg name = "touch_point_z"    default = "1.26896223"/>
+<arg name = "touch_point_x"    default = "0.14273354"/>
+<arg name = "touch_point_y"    default = "-0.13055163"/>
+<arg name = "touch_point_z"    default = "1.26996932"/>

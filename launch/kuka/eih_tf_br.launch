@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name   =   "eye_on_hand"           defualt = "true"     doc   = "eye-on-hand instead of eye-on-base" />
+    <arg name   =   "namespace_prefix"      default = "manipulator" />
+    <arg if     =   "$(arg eye_on_hand)"    name    = "namespace"       value = "$(arg namespace_prefix)_eye_on_hand" />
+
+    <!--it is possible to override the link names saved in the yaml file in case of name clashes, for example-->
+    <arg if         = "$(arg eye_on_hand)"  name    = "robot_effector_frame" default = "iiwa_link_ee" />
+    <arg name       = "tracking_base_frame" default = "iiwa_flange_marker" />
+    
+    <arg name="inverse" default="false" />
+    <arg name="calibration_file" default="" />
+    
+    <!--publish hand-eye calibration-->
+    <group ns="$(arg namespace)">
+        <param name="eye_on_hand"       value="$(arg eye_on_hand)" />
+        <param if="$(arg eye_on_hand)"  name="robot_effector_frame" value="$(arg robot_effector_frame)" />
+        <param name="tracking_base_frame" value="$(arg tracking_base_frame)" />
+        <param name="inverse"           value="$(arg inverse)" />
+        <param name="calibration_file"  value="$(arg calibration_file)" />
+        <node name="$(arg namespace)" pkg="easy_handeye" type="publish.py" output="screen"/>
+    </group>
+
+    <node type="rviz" name="rviz_endo360_calibration" pkg="rviz" 
+        args="-d $(find tool_point_calibration)/rviz/kuka_endo360_calibration.rviz" />
+
+    <!-- This will build the transformation of atracsys (renamed as fusion_track wrt  marker_kuka_flange) -->
+    <node pkg = "nir_blob_tracker" type ="tf_inverter" name ="tf_inverter">
+        <!-- This takes the name from the ROS Atracsys system-->
+        <param name = "listen_frame_a"  value = "atracsys" />
+        <param name = "listen_frame_b"  value = "marker_kuka_flange" />
+        <!-- This will be used by the hand_to_eye node-->
+        <param name = "new_frame_a"     value = "iiwa_flange_marker" />
+        <param name = "new_frame_b"     value = "fusion_track" />
+    </node>
+
+    <node pkg = "dvrk_position_accuracy_evaluation" type ="atracsys_to_fusion_track.sh"  name ="atracsys_to_fusion_track"/>
+
+
+</launch>
